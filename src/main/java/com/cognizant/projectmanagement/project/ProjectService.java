@@ -22,9 +22,8 @@ public class ProjectService {
 		return projects;
 	}
 	
-	@Transactional	
-    public void updateProject(Project project, Integer user_id) {
-		projectRepository.updateProject(project.getEndDate(),project.getId(),project.getPriority(),project.getProject(),project.getStartDate());
+    public void updateProject(Project project) {
+		projectRepository.save(project);
    }
 	
 	public Project createProject(Project project) {

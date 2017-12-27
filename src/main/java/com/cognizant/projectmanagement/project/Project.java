@@ -18,6 +18,7 @@ import com.cognizant.projectmanagement.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Project")
@@ -42,8 +43,9 @@ public class Project {
 		this.user = user;
 		this.task = task;
 	}
+
 	public Project() {
-		
+
 	}
 
 	@Id
@@ -114,21 +116,14 @@ public class Project {
 		this.priority = priority;
 	}
 
-	@OneToMany(
-            mappedBy = "projectId",
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true)
+	@OneToMany(mappedBy = "projectId", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JsonBackReference
-    @JsonIgnore
-    private Set<User> user;
-	
-	@OneToMany(
-            mappedBy = "project",
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true)
-	@JsonBackReference
-    @JsonIgnore
-    private Set<Tasks> task;
+	@JsonIgnore
+	private Set<User> user;
+
+	@OneToMany(mappedBy = "project", cascade = { CascadeType.MERGE,
+			CascadeType.PERSIST }, fetch = FetchType.LAZY, orphanRemoval = true)
+	@JsonManagedReference
+	@JsonIgnore
+	private Set<Tasks> task;
 }

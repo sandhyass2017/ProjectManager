@@ -12,9 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -23,10 +22,10 @@ public class ParentTask {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Parent_ID")
-    private int Id;
+    @Column(name = "parent_id")
+    private Integer id;
 	
-	@Column(name = "Parent_Task")
+	@Column(name = "parent_task")
     private String parentTask;
 	
 	@OneToMany(
@@ -34,33 +33,32 @@ public class ParentTask {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
-    @JsonManagedReference
+	@JsonBackReference
     @JsonIgnore
-    @JsonProperty(value="user")
     private Set<Tasks> task;
 	
 	public ParentTask() {
 	}
 
-	public ParentTask(int id, String parentTask,Set<Tasks> task) {
+	public ParentTask(Integer id, String parentTask,Set<Tasks> task) {
 		super();
-		Id = id;
+		this.id=id;
 		this.parentTask = parentTask;
 		this.task=task;
 	}
 
-	public ParentTask(int id, String parentTask) {
+	public ParentTask(Integer id, String parentTask) {
 		super();
-		Id = id;
+		this.id=id;
 		this.parentTask = parentTask;
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setId(Integer id) {
+		this.id=id;
 	}
 
 	public String getParentTask() {

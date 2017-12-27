@@ -26,21 +26,21 @@ public class TaskController {
 			return new ResponseEntity<List<Tasks>>(tasks, HttpStatus.OK);
 		}
 
-		// Add project
+		// Add task
 		@RequestMapping(method = RequestMethod.POST)
 		public ResponseEntity<Tasks> createTask(@RequestBody Tasks tasks) {
 			Tasks taskData = taskService.createTask(tasks);
 			return new ResponseEntity<Tasks>(taskData, HttpStatus.OK);
 		}
 
-		// Edit all project
-		@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-		public ResponseEntity<String> updateTask(@RequestBody Tasks tasks, @PathVariable Integer id) {
-			taskService.updateTask(tasks, id);
+		// Edit all task
+		@RequestMapping(method = RequestMethod.PUT,value="/{id}")
+		public ResponseEntity<String> updateTask(@RequestBody Tasks tasks,@PathVariable Integer id) {
+			taskService.updateTask(tasks,id);
 			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		}
 		
-		// Delete all project
+		// Delete all task
 		@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	    public ResponseEntity<String> deleteTask(@PathVariable Integer id) {
 			taskService.deleteTask(id);        

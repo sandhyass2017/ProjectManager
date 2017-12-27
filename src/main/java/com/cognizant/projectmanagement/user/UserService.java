@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 
@@ -19,16 +20,22 @@ public class UserService {
 		userRepository.findAll().forEach(users::add);
 		return users;
 	}
+	public User findUser(Integer userId) {
+		return userRepository.findOne(userId);
+	}
+	
 	
 	@Transactional	
-    public void updateUser(User user, Integer user_id) {
-     userRepository.updateUser(user.getEmployeeId(),user_id,user.getFirstName(),user.getLastName(),user.getProjectId(),user.getTaskId());
+    public void updateUser(User user) {
+     userRepository.save(user);
    }
 	
 	public User createUser(User user) {
         return userRepository.save(user);
     }
+	
+	@Transactional
 	public void deleteUser(Integer id) {
-		 userRepository.delete(id);
+		 userRepository.deleteUser(id);
 	}
 }

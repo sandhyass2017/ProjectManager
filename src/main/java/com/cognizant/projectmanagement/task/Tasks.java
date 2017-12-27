@@ -38,14 +38,14 @@ public class Tasks {
 	private Integer taskId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "Parent_ID", nullable = false)
-	@JsonBackReference(value="parentTask")
+	@JoinColumn(name = "parent_id", nullable = false)
+	@JsonBackReference(value="ParentTask")
 	private ParentTask parentTask;
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "project_id", nullable = false)
-	@JsonBackReference(value="project")
+	@JsonBackReference(value="Project")
 	private Project project;
 	
 	@Column(name = Table.Task)
@@ -152,4 +152,9 @@ public class Tasks {
     //@JsonIgnore
     @JsonProperty(value="user")
     private Set<User> user;
+	
+	/*@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", nullable = false)
+	@JsonBackReference(value="user")
+	private User user;*/
 }

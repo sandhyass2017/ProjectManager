@@ -1,5 +1,8 @@
 package com.cognizant.projectmanagement.user;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,11 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.cognizant.projectmanagement.project.Project;
 import com.cognizant.projectmanagement.task.Tasks;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "User")
@@ -41,14 +46,25 @@ public class User {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "project_id", nullable = false)
-	@JsonBackReference(value="project")
+	@JsonBackReference(value="Project")
 	private Project projectId;
 
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "task_id", nullable = false)
-	@JsonBackReference(value="tasks")
+	@JsonBackReference(value="Tasks")
 	private Tasks taskId;
+	
+	
+	/*@OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
+	@JsonBackReference
+    //@JsonIgnore
+    @JsonProperty(value="tasks")
+    private Set<Tasks> taskId;*/
 
 	public Integer getUserId() {
 		return userId;
@@ -65,13 +81,7 @@ public class User {
 	public void setProjectId(Project projectId) {
 		this.projectId = projectId;
 	}
-	public Tasks getTaskId() {
-		return taskId;
-	}
 
-	public void setTaskId(Tasks taskId) {
-		this.taskId = taskId;
-	}
 
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
@@ -111,6 +121,14 @@ public class User {
 		this.projectId = projectId;
 		this.taskId = taskId;
 	}
+	public Tasks getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(Tasks taskId) {
+		this.taskId = taskId;
+	}
+
 	public User() {
 	}
 	public User(Integer userId, Integer employeeId, String firstName, String lastName) {

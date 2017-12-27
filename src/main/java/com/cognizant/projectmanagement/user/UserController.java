@@ -27,6 +27,13 @@ public class UserController {
 		return new ResponseEntity<List<User>>(userData, HttpStatus.OK);
 	}
 
+	// View user by name
+	@RequestMapping(method = RequestMethod.GET, value = "/userId/{userId}")
+	public ResponseEntity<User> getUserByName(@PathVariable Integer userId) {
+		User userData = userService.findUser(userId);
+		return new ResponseEntity<User>(userData, HttpStatus.OK);
+	}
+
 	// Add user
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -35,16 +42,16 @@ public class UserController {
 	}
 
 	// Edit all user
-	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-	public ResponseEntity<String> updateUser(@RequestBody User user, @PathVariable Integer id) {
-		userService.updateUser(user, id);
-		return new ResponseEntity<String>("Success",HttpStatus.OK);
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity<String> updateUser(@RequestBody User user) {
+		userService.updateUser(user);
+		return new ResponseEntity<String>("Success", HttpStatus.OK);
 	}
-	
+
 	// Delete all user
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
-         userService.deleteUser(id);        
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
-    }
+	public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+		userService.deleteUser(id);
+		return new ResponseEntity<String>("Success", HttpStatus.OK);
+	}
 }
