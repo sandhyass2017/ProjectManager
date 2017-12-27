@@ -21,29 +21,29 @@ public class TaskController {
 	
 	// View all task
 		@RequestMapping(method = RequestMethod.GET)
-		public ResponseEntity<List<Tasks>> getAllUser() {
-			List<Tasks> projects = taskService.getTasksList();
-			return new ResponseEntity<List<Tasks>>(projects, HttpStatus.OK);
+		public ResponseEntity<List<Tasks>> getAllTasks() {
+			List<Tasks> tasks = taskService.getTasksList();
+			return new ResponseEntity<List<Tasks>>(tasks, HttpStatus.OK);
 		}
 
 		// Add project
 		@RequestMapping(method = RequestMethod.POST)
-		public ResponseEntity<Tasks> createUser(@RequestBody Tasks project) {
-			Tasks projectData = taskService.createProject(project);
-			return new ResponseEntity<Tasks>(projectData, HttpStatus.OK);
+		public ResponseEntity<Tasks> createTask(@RequestBody Tasks tasks) {
+			Tasks taskData = taskService.createTask(tasks);
+			return new ResponseEntity<Tasks>(taskData, HttpStatus.OK);
 		}
 
 		// Edit all project
 		@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-		public ResponseEntity<Tasks> updateUser(@RequestBody Tasks project, @PathVariable Integer id) {
-			taskService.updateProject(project, id);
-			return new ResponseEntity<Tasks>(HttpStatus.OK);
+		public ResponseEntity<String> updateTask(@RequestBody Tasks tasks, @PathVariable Integer id) {
+			taskService.updateTask(tasks, id);
+			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		}
 		
 		// Delete all project
 		@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-	    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
-			taskService.deleteUser(id);        
+	    public ResponseEntity<String> deleteTask(@PathVariable Integer id) {
+			taskService.deleteTask(id);        
 	        return new ResponseEntity<String>("Success", HttpStatus.OK);
 	    }
 }

@@ -36,9 +36,9 @@ public class ProjectController {
 
 		// Edit all project
 		@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-		public ResponseEntity<Project> updateUser(@RequestBody Project project, @PathVariable Integer id) {
+		public ResponseEntity<String> updateUser(@RequestBody Project project, @PathVariable Integer id) {
 			projectService.updateProject(project, id);
-			return new ResponseEntity<Project>(HttpStatus.OK);
+			return new ResponseEntity<String>("Success",HttpStatus.OK);
 		}
 		
 		// Delete all project

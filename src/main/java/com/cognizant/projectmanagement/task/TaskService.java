@@ -22,14 +22,14 @@ public class TaskService {
 	}
 	
 	@Transactional	
-    public void updateProject(Tasks tasks, Integer task_id) {
+    public void updateTask(Tasks tasks, Integer task_id) {
 		taskRepository.updateTask(tasks.getEndDate(),tasks.getParentTask(),tasks.getPriority(),tasks.getProject(),tasks.getStartDate(),tasks.getStatus(),tasks.getTask(),task_id);
    }
 	
-	public Tasks createProject(Tasks tasks) {
+	public Tasks createTask(Tasks tasks) {
         return taskRepository.save(tasks);
     }
-	public void deleteUser(Integer id) {
+	public void deleteTask(Integer id) {
 		taskRepository.delete(id);
 	}
 }

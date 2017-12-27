@@ -13,15 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.cognizant.projectmanagement.project.Project;
 import com.cognizant.projectmanagement.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "Tasks")
@@ -52,19 +48,19 @@ public class Tasks {
 	@JsonBackReference(value="project")
 	private Project project;
 	
-	@Column(name = Table.Task, unique = true)
+	@Column(name = Table.Task)
 	private String task;
 
-	@Column(name = Table.Start_Date, unique = true)
+	@Column(name = Table.Start_Date)
 	private Date startDate;
 
-	@Column(name = Table.End_Date, unique = true)
+	@Column(name = Table.End_Date)
 	private Date endDate;
 
-	@Column(name = Table.Priority, unique = true)
+	@Column(name = Table.Priority)
 	private String priority;
 
-	@Column(name = Table.Status, unique = true)
+	@Column(name = Table.Status)
 	private String status;
 
 	public Tasks(Integer taskId, ParentTask parentId, String task, Date startDate, Date endDate, String priority,

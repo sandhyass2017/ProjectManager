@@ -51,18 +51,18 @@ public class Project {
 	@Column(name = Table.ID)
 	private Integer id;
 
-	@Column(name = Table.Project, unique = true)
+	@Column(name = Table.Project)
 	private String project;
 
-	@Column(name = Table.Start_Date, unique = true)
+	@Column(name = Table.Start_Date)
 	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Date startDate;
 
-	@Column(name = Table.End_Date, unique = true)
+	@Column(name = Table.End_Date)
 	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Date endDate;
 
-	@Column(name = Table.Priority, unique = true)
+	@Column(name = Table.Priority)
 	private String priority;
 
 	public Project(Integer projectId, String project, Date startDate, Date endDate, String priority) {
