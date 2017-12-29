@@ -45,13 +45,13 @@ public class User {
 	private String lastName;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "project_id", nullable = false)
+	@JoinColumn(name = "project_id", nullable = true)
 	@JsonBackReference(value="Project")
 	private Project projectId;
 
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "task_id", nullable = false)
+	@JoinColumn(name = "task_id", nullable = true)
 	@JsonBackReference(value="Tasks")
 	private Tasks taskId;
 	

@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,7 +34,7 @@ public class Project {
 		String Priority = "Priority";
 	}
 
-	public Project(Integer id, String project, Date startDate, Date endDate, String priority, Set<User> user,
+	public Project(Integer id, String project, Date startDate, Date endDate, String priority,User user,
 			Set<Tasks> task) {
 		super();
 		this.id = id;
@@ -116,10 +118,17 @@ public class Project {
 		this.priority = priority;
 	}
 
-	@OneToMany(mappedBy = "projectId", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JsonBackReference
+	/*@OneToMany(cascade = CascadeType.ALL)
+	//@JsonBackReference(value="user")
+	@JoinColumn(name = "employee_id")
 	@JsonIgnore
-	private Set<User> user;
+	private Set<User> user;*/
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "employee_id", nullable = true)
+	@JsonBackReference(value="user")
+	private User user;
 
 	@OneToMany(mappedBy = "project", cascade = { CascadeType.MERGE,
 			CascadeType.PERSIST }, fetch = FetchType.LAZY, orphanRemoval = true)
